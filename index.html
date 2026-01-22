@@ -31,14 +31,8 @@
             text-transform: uppercase;
         }
 
-        /* Password Screen */
-        .dot { width: 14px; height: 14px; border: 2px solid #ff85a2; border-radius: 50%; transition: 0.3s; }
-        .dot.filled { background: #ff85a2; box-shadow: 0 0 10px #ff85a2; }
-        .shake { animation: shake 0.4s; }
-        @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-10px)} 75%{transform:translateX(10px)} }
-
-        /* Falling Elements */
-        .falling { position: fixed; top: -50px; pointer-events: none; z-index: 5; animation: fall linear infinite; opacity: 0.8; }
+        /* Falling Elements Fix */
+        .falling { position: fixed; top: -50px; pointer-events: none; z-index: 5; animation: fall linear forwards; opacity: 0.8; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
         /* Photo Card Styling */
@@ -47,34 +41,42 @@
             width: 300px; 
             height: 380px; 
             background: #fff; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6); 
             display: flex; 
             flex-direction: column;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            overflow: hidden; /* Removes extra borders/gaps */
+            overflow: hidden;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
         }
         .caption-top {
             width: 100%;
-            padding: 12px 5px;
+            padding: 10px 5px;
             background: #fff;
             color: #ff4d94;
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-family: 'Great Vibes', cursive;
+            border-bottom: 1px solid #f0f0f0;
         }
         .photo-card img { 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; /* Fills the whole space */
+            object-fit: cover; 
         }
 
-        .btn-fancy { background: linear-gradient(45deg, #ff85a2, #ff4d94); box-shadow: 0 4px 15px rgba(255, 77, 148, 0.3); }
+        .btn-fancy { background: linear-gradient(45deg, #ff85a2, #ff4d94); box-shadow: 0 4px 15px rgba(255, 77, 148, 0.4); }
+        .btn-outline { border: 2px solid #ff85a2; color: #ff85a2; }
 
-        /* Envelope and Cake styles remain standard */
+        /* Password Dots */
+        .dot { width: 14px; height: 14px; border: 2px solid #ff85a2; border-radius: 50%; transition: 0.3s; }
+        .dot.filled { background: #ff85a2; box-shadow: 0 0 10px #ff85a2; }
+        .shake { animation: shake 0.4s; }
+        @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-10px)} 75%{transform:translateX(10px)} }
+
+        /* Envelope and Cake */
         .envelope-wrapper { position: relative; width: 280px; height: 180px; background: #ff4d94; border-radius: 0 0 15px 15px; cursor: pointer; }
         .envelope-flap { position: absolute; top: 0; left: 0; border-left: 140px solid transparent; border-right: 140px solid transparent; border-top: 100px solid #ff7eb9; transform-origin: top; transition: 0.8s; z-index: 30; }
         .letter-paper { position: absolute; top: 10%; left: 10%; width: 80%; height: 80%; background: white; color: #ff4d94; z-index: 20; border-radius: 5px; transition: 1s ease; display: flex; align-items: center; justify-content: center; }
@@ -157,7 +159,7 @@
         <div class="cake-container" id="cake-stage">
             <svg viewBox="0 0 200 200" width="220"><rect x="20" y="100" width="160" height="70" fill="#f48fb1" rx="10"/><rect x="40" y="60" width="120" height="50" fill="#f06292" rx="10"/><rect fill="#ce93d8" x="70" y="30" width="6" height="30" rx="2"/><rect fill="#ce93d8" x="100" y="25" width="6" height="35" rx="2"/><rect fill="#ce93d8" x="130" y="30" width="6" height="30" rx="2"/><path class="flame" d="M73 15c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/><path class="flame" d="M103 10c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/><path class="flame" d="M133 15c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/></svg>
         </div>
-        <button onclick="lightCandles()" class="bg-orange-500 mt-12 px-10 py-4 rounded-full font-bold text-white">Light Candles 🕯️</button>
+        <button onclick="lightCandles()" class="bg-orange-500 mt-12 px-10 py-4 rounded-full font-bold text-white uppercase text-xs">Light Candles 🕯️</button>
     </section>
 
     <section id="scene-blow" class="scene">
@@ -166,7 +168,7 @@
             <svg viewBox="0 0 200 200" width="220"><rect x="20" y="100" width="160" height="70" fill="#f48fb1" rx="10"/><rect x="40" y="60" width="120" height="50" fill="#f06292" rx="10"/><rect fill="#ce93d8" x="70" y="30" width="6" height="30" rx="2"/><rect fill="#ce93d8" x="100" y="25" width="6" height="35" rx="2"/><rect fill="#ce93d8" x="130" y="30" width="6" height="30" rx="2"/><path class="flame" style="opacity:1" d="M73 15c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/><path class="flame" style="opacity:1" d="M103 10c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/><path class="flame" style="opacity:1" d="M133 15c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/></svg>
         </div>
         <div id="mic-hint" class="mt-8 text-pink-300 text-sm animate-pulse italic">Blow on the microphone! 🌬️</div>
-        <button id="btn-cut" onclick="toScene(6)" class="hidden btn-fancy px-10 py-4 rounded-full font-bold text-white">Cut the Cake 🍰</button>
+        <button id="btn-cut" onclick="toScene(6)" class="hidden btn-fancy px-10 py-4 rounded-full font-bold text-white uppercase text-xs">Cut the Cake 🍰</button>
     </section>
 
     <section id="scene-6" class="scene">
@@ -181,15 +183,18 @@
                 <div class="photo-card"><div class="caption-top">Pure Joy</div><img src="photo2.jpg"></div>
                 <div class="photo-card"><div class="caption-top">The Beginning</div><img src="photo1.jpg"></div>
             </div>
-            <p class="mt-12 text-pink-200/50 text-xs uppercase tracking-widest animate-pulse">Tap photo to shuffle (8 photos) 🌙</p>
-            <button onclick="toScene(7)" class="btn-fancy mt-8 px-8 py-3 rounded-xl text-xs font-bold text-white">Final Message 👑</button>
+            <p class="mt-12 text-pink-200/50 text-xs uppercase tracking-widest animate-pulse">Tap photo to shuffle 🌙</p>
+            <button onclick="toScene(7)" class="btn-fancy mt-8 px-8 py-3 rounded-xl text-xs font-bold text-white uppercase">Final Message 👑</button>
         </div>
     </section>
 
     <section id="scene-7" class="scene text-center px-6">
-        <h2 class="cursive text-4xl text-pink-400 mb-4">Dearest Mrs Siyam,</h2>
-        <p class="serif text-base text-pink-50 mb-8 max-w-xs mx-auto">Watching you grow has been my greatest joy. I love you endlessly.</p>
-        <div class="flex gap-4"><button onclick="finalBlast()" class="bg-red-500 px-6 py-3 rounded-full font-bold text-white text-xs">Seal with Love 🌹</button></div>
+        <h2 class="cursive text-5xl text-pink-400 mb-6">Dearest Mrs Siyam,</h2>
+        <p class="serif text-base text-pink-50 mb-10 max-w-xs mx-auto leading-relaxed">Watching you grow has been my greatest joy. I love you endlessly, my beautiful Moon.</p>
+        <div class="flex flex-col gap-4 w-full max-w-xs">
+            <button onclick="finalBlast()" class="bg-red-500 py-4 rounded-full font-bold text-white text-xs uppercase tracking-widest">Seal with Love 🌹</button>
+            <button onclick="location.reload()" class="btn-outline py-4 rounded-full font-bold text-xs uppercase tracking-widest">Experience Again 🔄</button>
+        </div>
     </section>
 
     <script>
@@ -200,6 +205,20 @@
         let currentPin = "";
         const targetPin = "230623";
         let candlesOut = false;
+
+        // Falling Elements Logic
+        function createFalling() {
+            const container = document.getElementById('falling-container');
+            const el = document.createElement('div');
+            el.className = 'falling';
+            el.innerText = ['❤️', '✨', '🌙', '🌸', '⭐'][Math.floor(Math.random()*5)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            el.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            container.appendChild(el);
+            setTimeout(() => el.remove(), 7000);
+        }
+        setInterval(createFalling, 500);
 
         function press(n) {
             if (currentPin.length < 6) {
@@ -234,7 +253,7 @@
                 chime.currentTime = 0; chime.play();
                 document.getElementById('timer').innerText = count; 
                 count--;
-                if (count < 0) { clearInterval(timerInt); setTimeout(() => { blast.play(); confetti(); toScene('scene-bigwish'); }, 1000); }
+                if (count < 0) { clearInterval(timerInt); setTimeout(() => { blast.play(); confetti({particleCount: 150, spread: 70}); toScene('scene-bigwish'); }, 1000); }
             }, 1200);
         }
 
@@ -263,12 +282,11 @@
             document.querySelectorAll('.flame').forEach(f => f.style.opacity = "0");
             document.getElementById('mic-hint').classList.add('hidden');
             document.getElementById('btn-cut').classList.remove('hidden');
-            confetti();
+            confetti({particleCount: 200, origin: {y: 0.7}});
         }
 
         function handleCakeTouch() { if(candlesOut) toScene(6); else blowOut(); }
 
-        // GALLERY SETUP
         function setupGalleryZIndex() {
             const cards = document.querySelectorAll('.photo-card');
             cards.forEach((card, index) => { card.style.zIndex = cards.length - index; });
@@ -288,15 +306,11 @@
             });
         }
 
-        function finalBlast() { blast.play(); confetti({ particleCount: 400 }); }
-
-        setInterval(() => {
-            const el = document.createElement('div'); el.className = 'falling';
-            el.innerText = ['❤️', '✨', '🌙'][Math.floor(Math.random()*3)];
-            el.style.left = Math.random() * 100 + 'vw';
-            document.getElementById('falling-container').appendChild(el);
-            setTimeout(() => el.remove(), 7000);
-        }, 500);
+        function finalBlast() { 
+            blast.play(); 
+            confetti({ particleCount: 400, spread: 100, origin: { y: 0.6 } }); 
+            setTimeout(() => { alert("Happy Birthday Moon! I love you forever! ❤️"); }, 500);
+        }
     </script>
 </body>
 </html>
