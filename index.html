@@ -29,61 +29,59 @@
             -webkit-text-fill-color: transparent;
             line-height: 1.2;
             text-transform: uppercase;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
         }
 
+        /* Password Screen */
         .dot { width: 14px; height: 14px; border: 2px solid #ff85a2; border-radius: 50%; transition: 0.3s; }
         .dot.filled { background: #ff85a2; box-shadow: 0 0 10px #ff85a2; }
         .shake { animation: shake 0.4s; }
         @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-10px)} 75%{transform:translateX(10px)} }
 
+        /* Falling Elements */
         .falling { position: fixed; top: -50px; pointer-events: none; z-index: 5; animation: fall linear infinite; opacity: 0.8; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        .envelope-wrapper { position: relative; width: 280px; height: 180px; background: #ff4d94; border-radius: 0 0 15px 15px; cursor: pointer; }
-        .envelope-flap { position: absolute; top: 0; left: 0; border-left: 140px solid transparent; border-right: 140px solid transparent; border-top: 100px solid #ff7eb9; transform-origin: top; transition: 0.8s; z-index: 30; }
-        .letter-paper { position: absolute; top: 10%; left: 10%; width: 80%; height: 80%; background: white; color: #ff4d94; z-index: 20; border-radius: 5px; transition: 1s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .open .envelope-flap { transform: rotateX(180deg); z-index: 10; }
-        .open .letter-paper { transform: translateY(-110px); }
-
-        .cake-container { position: relative; width: 220px; height: 200px; transition: filter 0.5s; cursor: default; }
-        .lit .cake-container { filter: drop-shadow(0 0 20px rgba(255, 235, 59, 0.4)); }
-        .flame { fill: #ffeb3b; opacity: 0; transition: opacity 0.4s; animation: flicker 0.1s infinite alternate; }
-        .lit .flame { opacity: 1; }
-        @keyframes flicker { from { transform: scale(1); } to { transform: scale(1.1); } }
-
-        /* PHOTO STYLING */
+        /* Photo Card Styling */
         .photo-card { 
             position: absolute; 
-            width: 280px; 
-            height: 350px; 
+            width: 300px; 
+            height: 380px; 
             background: #fff; 
-            padding: 10px 10px 45px 10px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
             display: flex; 
             flex-direction: column;
-            border-radius: 2px;
+            border-radius: 4px;
             cursor: pointer;
-            user-select: none;
+            overflow: hidden; /* Removes extra borders/gaps */
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
         }
+        .caption-top {
+            width: 100%;
+            padding: 12px 5px;
+            background: #fff;
+            color: #ff4d94;
+            text-align: center;
+            font-size: 1.3rem;
+            font-family: 'Great Vibes', cursive;
+        }
         .photo-card img { 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; 
-            background: #eee;
-        }
-        .photo-card .caption {
-            margin-top: 12px;
-            color: #ff4d94;
-            text-align: center;
-            font-size: 1.1rem;
+            object-fit: cover; /* Fills the whole space */
         }
 
-        .btn-fancy { background: linear-gradient(45deg, #ff85a2, #ff4d94); box-shadow: 0 4px 15px rgba(255, 77, 148, 0.3); transition: transform 0.2s; }
-        .btn-fancy:active { transform: scale(0.95); }
+        .btn-fancy { background: linear-gradient(45deg, #ff85a2, #ff4d94); box-shadow: 0 4px 15px rgba(255, 77, 148, 0.3); }
+
+        /* Envelope and Cake styles remain standard */
+        .envelope-wrapper { position: relative; width: 280px; height: 180px; background: #ff4d94; border-radius: 0 0 15px 15px; cursor: pointer; }
+        .envelope-flap { position: absolute; top: 0; left: 0; border-left: 140px solid transparent; border-right: 140px solid transparent; border-top: 100px solid #ff7eb9; transform-origin: top; transition: 0.8s; z-index: 30; }
+        .letter-paper { position: absolute; top: 10%; left: 10%; width: 80%; height: 80%; background: white; color: #ff4d94; z-index: 20; border-radius: 5px; transition: 1s ease; display: flex; align-items: center; justify-content: center; }
+        .open .envelope-flap { transform: rotateX(180deg); z-index: 10; }
+        .open .letter-paper { transform: translateY(-110px); }
+        .flame { fill: #ffeb3b; opacity: 0; transition: opacity 0.4s; }
+        .lit .flame { opacity: 1; }
     </style>
 </head>
 <body>
@@ -102,18 +100,16 @@
             <div class="dot"></div><div class="dot"></div><div class="dot"></div>
         </div>
         <div class="grid grid-cols-3 gap-6">
-            <script>
-                for(let i=1; i<=9; i++) document.write(`<button onclick="press(${i})" class="w-16 h-16 rounded-full border border-white/10 text-xl active:bg-pink-500 transition-all">${i}</button>`);
-            </script>
+            <script>for(let i=1; i<=9; i++) document.write(`<button onclick="press(${i})" class="w-16 h-16 rounded-full border border-white/10 text-xl active:bg-pink-500">${i}</button>`);</script>
             <button onclick="clearPin()" class="text-[10px] uppercase font-bold text-pink-400">Clear</button>
             <button onclick="press(0)" class="w-16 h-16 rounded-full border border-white/10 text-xl">0</button>
         </div>
     </div>
 
     <section id="scene-1" class="scene">
-        <div class="bg-white/5 backdrop-blur-xl p-10 rounded-[3rem] text-center border border-white/10 max-w-sm">
+        <div class="bg-white/5 backdrop-blur-xl p-10 rounded-[3rem] text-center border border-white/10">
             <h1 class="cursive text-5xl text-pink-400 mb-6">Happy Birthday Moon! 🥳✨</h1>
-            <button onclick="startApp()" class="btn-fancy px-10 py-4 rounded-full font-bold uppercase text-xs tracking-widest text-white">Open the Magic</button>
+            <button onclick="startApp()" class="btn-fancy px-10 py-4 rounded-full font-bold uppercase text-xs text-white">Open the Magic</button>
         </div>
     </section>
 
@@ -127,7 +123,7 @@
             <h1 id="reveal-text" class="premium-title text-6xl md:text-8xl mb-8">HAPPY<br>BIRTHDAY<br>BABY</h1>
             <div class="h-1 w-24 bg-pink-500 mx-auto mb-8"></div>
             <p class="serif italic text-pink-100/60 text-lg tracking-widest mb-12">YOU ARE MY WORLD ❤️</p>
-            <button onclick="toScene('scene-3')" class="btn-fancy px-12 py-4 rounded-full font-bold uppercase text-xs tracking-[0.2em] text-white">Open My Message</button>
+            <button onclick="toScene('scene-3')" class="btn-fancy px-12 py-4 rounded-full font-bold uppercase text-xs text-white">Open My Message</button>
         </div>
     </section>
 
@@ -157,50 +153,43 @@
     </section>
 
     <section id="scene-5" class="scene">
-        <h2 class="cursive text-4xl text-pink-300 mb-10 text-center">Now, let's light up the day!</h2>
+        <h2 class="cursive text-4xl text-pink-300 mb-10 text-center">Let's light up the day!</h2>
         <div class="cake-container" id="cake-stage">
-            <div class="cake-half"><svg viewBox="0 0 200 200"><rect x="20" y="100" width="160" height="70" fill="#f48fb1" rx="10"/><rect x="40" y="60" width="120" height="50" fill="#f06292" rx="10"/><rect fill="#ce93d8" x="70" y="30" width="6" height="30" rx="2"/><rect fill="#ce93d8" x="100" y="25" width="6" height="35" rx="2"/><rect fill="#ce93d8" x="130" y="30" width="6" height="30" rx="2"/><path class="flame" d="M73 15c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/><path class="flame" d="M103 10c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/><path class="flame" d="M133 15c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/></svg></div>
+            <svg viewBox="0 0 200 200" width="220"><rect x="20" y="100" width="160" height="70" fill="#f48fb1" rx="10"/><rect x="40" y="60" width="120" height="50" fill="#f06292" rx="10"/><rect fill="#ce93d8" x="70" y="30" width="6" height="30" rx="2"/><rect fill="#ce93d8" x="100" y="25" width="6" height="35" rx="2"/><rect fill="#ce93d8" x="130" y="30" width="6" height="30" rx="2"/><path class="flame" d="M73 15c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/><path class="flame" d="M103 10c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/><path class="flame" d="M133 15c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/></svg>
         </div>
-        <div class="mt-12 w-64">
-            <button id="btn-light" onclick="lightCandles()" class="bg-orange-500 w-full py-4 rounded-full font-bold uppercase text-xs text-white">Light Candles 🕯️</button>
-        </div>
+        <button onclick="lightCandles()" class="bg-orange-500 mt-12 px-10 py-4 rounded-full font-bold text-white">Light Candles 🕯️</button>
     </section>
 
     <section id="scene-blow" class="scene">
         <h2 class="cursive text-4xl text-pink-300 mb-10 text-center">Make it come true...</h2>
-        <div class="cake-container lit" id="cake-blow-stage" onclick="handleCakeTouch()">
-            <div class="cake-half"><svg viewBox="0 0 200 200"><rect x="20" y="100" width="160" height="70" fill="#f48fb1" rx="10"/><rect x="40" y="60" width="120" height="50" fill="#f06292" rx="10"/><rect fill="#ce93d8" x="70" y="30" width="6" height="30" rx="2"/><rect fill="#ce93d8" x="100" y="25" width="6" height="35" rx="2"/><rect fill="#ce93d8" x="130" y="30" width="6" height="30" rx="2"/><path class="flame" style="opacity:1" d="M73 15c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/><path class="flame" style="opacity:1" d="M103 10c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/><path class="flame" style="opacity:1" d="M133 15c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/></svg></div>
+        <div class="cake-container lit" onclick="handleCakeTouch()">
+            <svg viewBox="0 0 200 200" width="220"><rect x="20" y="100" width="160" height="70" fill="#f48fb1" rx="10"/><rect x="40" y="60" width="120" height="50" fill="#f06292" rx="10"/><rect fill="#ce93d8" x="70" y="30" width="6" height="30" rx="2"/><rect fill="#ce93d8" x="100" y="25" width="6" height="35" rx="2"/><rect fill="#ce93d8" x="130" y="30" width="6" height="30" rx="2"/><path class="flame" style="opacity:1" d="M73 15c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/><path class="flame" style="opacity:1" d="M103 10c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/><path class="flame" style="opacity:1" d="M133 15c-3 0-4 4-4 7s2 8 4 8 4-5 4-8-1-7-4-7z"/></svg>
         </div>
-        <div class="mt-12 w-64">
-            <div id="mic-hint" class="text-pink-300 text-sm animate-pulse serif italic text-center">Blow on the microphone! 🌬️</div>
-            <button id="btn-cut" onclick="toScene(6)" class="hidden btn-fancy w-full py-4 rounded-full font-bold uppercase text-xs text-white">Cut the Cake 🍰</button>
-        </div>
+        <div id="mic-hint" class="mt-8 text-pink-300 text-sm animate-pulse italic">Blow on the microphone! 🌬️</div>
+        <button id="btn-cut" onclick="toScene(6)" class="hidden btn-fancy px-10 py-4 rounded-full font-bold text-white">Cut the Cake 🍰</button>
     </section>
 
     <section id="scene-6" class="scene">
         <div class="relative w-full h-full flex flex-col items-center justify-center">
-            <div id="gallery" class="relative w-[280px] h-[350px]" onclick="shuffleGallery()">
-                <div class="photo-card"><img src="photo8.jpg"><div class="caption cursive">Infinity</div></div>
-                <div class="photo-card"><img src="photo7.jpg"><div class="caption cursive">My Peace</div></div>
-                <div class="photo-card"><img src="photo6.jpg"><div class="caption cursive">Magic</div></div>
-                <div class="photo-card"><img src="photo5.jpg"><div class="caption cursive">Always You</div></div>
-                <div class="photo-card"><img src="photo4.jpg"><div class="caption cursive">Forever</div></div>
-                <div class="photo-card"><img src="photo3.jpg"><div class="caption cursive">My World</div></div>
-                <div class="photo-card"><img src="photo2.jpg"><div class="caption cursive">Pure Joy</div></div>
-                <div class="photo-card"><img src="photo1.jpg"><div class="caption cursive">The Beginning</div></div>
+            <div id="gallery" class="relative w-[300px] h-[380px]" onclick="shuffleGallery()">
+                <div class="photo-card"><div class="caption-top">Infinity</div><img src="photo8.jpg"></div>
+                <div class="photo-card"><div class="caption-top">My Peace</div><img src="photo7.jpg"></div>
+                <div class="photo-card"><div class="caption-top">Magic</div><img src="photo6.jpg"></div>
+                <div class="photo-card"><div class="caption-top">Always You</div><img src="photo5.jpg"></div>
+                <div class="photo-card"><div class="caption-top">Forever</div><img src="photo4.jpg"></div>
+                <div class="photo-card"><div class="caption-top">My World</div><img src="photo3.jpg"></div>
+                <div class="photo-card"><div class="caption-top">Pure Joy</div><img src="photo2.jpg"></div>
+                <div class="photo-card"><div class="caption-top">The Beginning</div><img src="photo1.jpg"></div>
             </div>
-            <p class="mt-16 text-pink-200/50 text-[10px] uppercase tracking-widest animate-pulse">Tap photo to shuffle 🌙</p>
-            <button onclick="toScene(7)" class="btn-fancy mt-8 px-8 py-3 rounded-xl text-xs font-bold uppercase text-white">Final Message 👑</button>
+            <p class="mt-12 text-pink-200/50 text-xs uppercase tracking-widest animate-pulse">Tap photo to shuffle (8 photos) 🌙</p>
+            <button onclick="toScene(7)" class="btn-fancy mt-8 px-8 py-3 rounded-xl text-xs font-bold text-white">Final Message 👑</button>
         </div>
     </section>
 
     <section id="scene-7" class="scene text-center px-6">
         <h2 class="cursive text-4xl text-pink-400 mb-4">Dearest Mrs Siyam,</h2>
         <p class="serif text-base text-pink-50 mb-8 max-w-xs mx-auto">Watching you grow has been my greatest joy. I love you endlessly.</p>
-        <div class="flex items-center justify-center gap-4">
-            <button onclick="finalBlast()" class="bg-red-500 px-6 py-3 rounded-full font-bold uppercase text-[10px] tracking-wider text-white">Seal with Love 🌹</button>
-            <button onclick="location.reload()" class="border border-pink-400/30 px-6 py-3 rounded-full font-bold uppercase text-[10px] tracking-wider">Restart 🔄</button>
-        </div>
+        <div class="flex gap-4"><button onclick="finalBlast()" class="bg-red-500 px-6 py-3 rounded-full font-bold text-white text-xs">Seal with Love 🌹</button></div>
     </section>
 
     <script>
@@ -234,8 +223,7 @@
                 const target = typeof id === 'string' ? document.getElementById(id) : document.getElementById(`scene-${id}`);
                 target.classList.add('active');
                 gsap.fromTo(target, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.5 });
-                if(id === 'scene-6') setupGalleryZIndex();
-                if(id === 'scene-bigwish') gsap.from("#reveal-text", { y: 50, opacity: 0, duration: 1, ease: "power4.out", delay: 0.3 });
+                if(id === 6) setupGalleryZIndex();
             }});
         }
 
@@ -245,9 +233,8 @@
             const timerInt = setInterval(() => {
                 chime.currentTime = 0; chime.play();
                 document.getElementById('timer').innerText = count; 
-                gsap.fromTo("#timer", { scale: 0 }, { scale: 1, duration: 0.5 });
                 count--;
-                if (count < 0) { clearInterval(timerInt); setTimeout(() => { blast.play(); confetti({ particleCount: 200 }); toScene('scene-bigwish'); }, 1000); }
+                if (count < 0) { clearInterval(timerInt); setTimeout(() => { blast.play(); confetti(); toScene('scene-bigwish'); }, 1000); }
             }, 1200);
         }
 
@@ -265,10 +252,10 @@
                 function detect() {
                     analyser.getByteFrequencyData(data);
                     if (data.reduce((a,b)=>a+b)/data.length > 55) { blowOut(); stream.getTracks().forEach(t=>t.stop()); }
-                    else if (!candlesOut) { requestAnimationFrame(detect); }
+                    else if (!candlesOut) requestAnimationFrame(detect);
                 }
                 detect();
-            } catch (e) { document.getElementById('mic-hint').innerHTML = "Mic blocked? <span onclick='blowOut()'>Tap Cake to Blow</span>"; }
+            } catch (e) { document.getElementById('mic-hint').innerHTML = "Tap Cake to Blow"; }
         }
 
         function blowOut() {
@@ -276,46 +263,37 @@
             document.querySelectorAll('.flame').forEach(f => f.style.opacity = "0");
             document.getElementById('mic-hint').classList.add('hidden');
             document.getElementById('btn-cut').classList.remove('hidden');
-            confetti({ particleCount: 200 });
+            confetti();
         }
 
         function handleCakeTouch() { if(candlesOut) toScene(6); else blowOut(); }
 
-        // AUTOMATIC Z-INDEX SETUP
+        // GALLERY SETUP
         function setupGalleryZIndex() {
             const cards = document.querySelectorAll('.photo-card');
-            cards.forEach((card, index) => {
-                card.style.zIndex = cards.length - index;
-            });
+            cards.forEach((card, index) => { card.style.zIndex = cards.length - index; });
         }
 
         function shuffleGallery() {
             const cards = Array.from(document.querySelectorAll('.photo-card'));
             const topCard = cards.reduce((prev, curr) => (parseInt(prev.style.zIndex) > parseInt(curr.style.zIndex)) ? prev : curr);
-            
             chime.currentTime = 0; chime.play();
-            
             gsap.to(topCard, {
-                x: 350, rotation: 25, opacity: 0, duration: 0.5,
+                x: 400, rotation: 20, opacity: 0, duration: 0.5,
                 onComplete: () => {
-                    cards.forEach(card => {
-                        let z = parseInt(card.style.zIndex);
-                        card.style.zIndex = z + 1;
-                    });
+                    cards.forEach(card => { card.style.zIndex = parseInt(card.style.zIndex) + 1; });
                     topCard.style.zIndex = "1";
                     gsap.set(topCard, { x: 0, rotation: 0, opacity: 1 });
                 }
             });
         }
 
-        function finalBlast() { blast.play(); confetti({ particleCount: 500, spread: 150 }); setTimeout(() => { alert("Happy Birthday Moon!"); }, 500); }
+        function finalBlast() { blast.play(); confetti({ particleCount: 400 }); }
 
         setInterval(() => {
             const el = document.createElement('div'); el.className = 'falling';
-            el.innerText = ['❤️', '✨', '🌙', '🌸'][Math.floor(Math.random()*4)];
+            el.innerText = ['❤️', '✨', '🌙'][Math.floor(Math.random()*3)];
             el.style.left = Math.random() * 100 + 'vw';
-            el.style.fontSize = (Math.random() * 20 + 15) + 'px';
-            el.style.animationDuration = (Math.random() * 3 + 4) + 's';
             document.getElementById('falling-container').appendChild(el);
             setTimeout(() => el.remove(), 7000);
         }, 500);
