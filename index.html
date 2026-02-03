@@ -31,8 +31,9 @@
             text-transform: uppercase;
         }
 
+        /* FASTER FALLING EMOJIS STYLE */
         .falling { position: fixed; top: -50px; pointer-events: none; z-index: 5; animation: fall linear forwards; opacity: 0.8; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        @keyframes fall { to { transform: translateY(120vh) rotate(360deg); } }
 
         .photo-card { 
             position: absolute; 
@@ -79,7 +80,6 @@
         .open .envelope-flap { transform: rotateX(180deg); z-index: 10; }
         .open .letter-paper { transform: translateY(-110px); }
         
-        /* Cake styles */
         .flame { fill: #ffeb3b; opacity: 0; transition: opacity 0.4s; }
         .lit .flame { opacity: 1; }
         .cake-container { cursor: pointer; transition: transform 0.3s; }
@@ -141,14 +141,14 @@
             <h2 class="cursive text-3xl text-pink-400 mb-6">Dearest Moon 🌙</h2>
             <div class="serif text-base leading-relaxed text-pink-50/90 space-y-4 text-left">
                 <p>
-                    "**Happy Birthday, Moon.** 🎂 **Almost four years ago, my life changed forever;** hence, this day is more significant to me than words can express. ✨ 
-                    While others celebrate your birth, **I celebrate our union.** 🥂"
+                    "<b>Happy Birthday, Moon.</b> 🎂 <b>Almost four years ago, my life changed forever;</b> hence, this day is more significant to me than words can express. ✨ 
+                    While others celebrate your birth, <b>I celebrate our union.</b> 🥂"
                 </p>
                 <p>
-                    "Moreover, **I find the most value in our private, stolen moments together.** 🌌 Despite the serendipitous nature of our first meeting, that **connection was undeniable from the start.** 💬💖"
+                    "Moreover, <b>I find the most value in our private, stolen moments together.</b> 🌌 Despite the serendipitous nature of our first meeting, that <b>connection was undeniable from the start.</b> 💬💖"
                 </p>
                 <p>
-                    "**You are my peace and my joy.** 🌹 Ultimately, **I hope to love you for a lifetime and beyond.** ♾️❤️"
+                    "<b>You are my peace and my joy.</b> 🌹 Ultimately, <b>I hope to love you for a lifetime and beyond.</b> ♾️❤️"
                 </p>
             </div>
             
@@ -228,10 +228,9 @@
         </div>
     </section>
 
-<section id="scene-7" class="scene text-center px-6">
+    <section id="scene-7" class="scene text-center px-6">
         <div class="bg-white/5 backdrop-blur-xl p-8 rounded-[2rem] max-w-sm border border-white/10 shadow-2xl">
             <h2 class="cursive text-5xl text-pink-400 mb-6">Always Yours 🌙</h2>
-            
             <div class="serif text-base text-pink-50/90 mb-10 leading-relaxed italic">
                 <p>
                     "Every moment we’ve shared has been a gift. 🎁✨ From those <b>private, stolen moments</b> to the quiet nights where it was just us, you have become the most significant part of my life."
@@ -243,7 +242,6 @@
                     I am yours, for a lifetime and beyond. ♾️🌹
                 </p>
             </div>
-
             <div class="flex flex-col gap-4 w-full">
                 <button onclick="finalBlast()" class="bg-red-500 py-4 rounded-full font-bold text-white text-xs uppercase tracking-[0.2em] shadow-lg hover:scale-105 transition-transform">
                     Seal with Love 🌹
@@ -254,6 +252,7 @@
             </div>
         </div>
     </section>
+
     <script>
         const chime = document.getElementById('snd-chime');
         const blast = document.getElementById('snd-blast');
@@ -263,18 +262,22 @@
         const targetPin = "230623";
         let candlesOut = false;
 
+        // Falling Elements Logic - Denser & Faster
         function createFalling() {
             const container = document.getElementById('falling-container');
+            if (!container) return;
             const el = document.createElement('div');
             el.className = 'falling';
-            el.innerText = ['❤️', '✨', '🌙', '🌸', '⭐'][Math.floor(Math.random()*5)];
+            const emojis = ['💜','🩵','❤️','🤍','💘','💝','💖','💗','💓','❣️','✨','🌟','⭐','💕','🌼','🌸','💮','🌹','🌙','❄️','☄️','🎆','🎇'];
+            el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
             el.style.left = Math.random() * 100 + 'vw';
             el.style.fontSize = (Math.random() * 20 + 15) + 'px';
-            el.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            const speed = (Math.random() * 2 + 2) + 's';
+            el.style.animationDuration = speed;
             container.appendChild(el);
-            setTimeout(() => el.remove(), 7000);
+            setTimeout(() => el.remove(), 4000);
         }
-        setInterval(createFalling, 500);
+        setInterval(createFalling, 300);
 
         function press(n) {
             if (currentPin.length < 6) {
@@ -290,6 +293,7 @@
                 }
             }
         }
+
         function clearPin() { currentPin = ""; document.querySelectorAll('.dot').forEach(d => d.classList.remove('filled')); document.getElementById('password-screen').classList.remove('shake'); }
 
         function toScene(id) {
@@ -343,14 +347,10 @@
 
         function handleCakeTouch() { if(candlesOut) cutCake(); else blowOut(); }
 
-        /* NEW CAKE CUTTING LOGIC */
         function cutCake() {
             magic.play();
-            // Animate the two halves splitting
             gsap.to("#cake-left-blow", { x: -50, rotation: -10, duration: 0.8, ease: "power2.out" });
             gsap.to("#cake-right-blow", { x: 50, rotation: 10, duration: 0.8, ease: "power2.out" });
-            
-            // Move to next scene after a small delay
             setTimeout(() => toScene(6), 1000);
         }
 
@@ -372,26 +372,18 @@
                 }
             });
         }
-function finalBlast() { 
-    // This plays the sound effect
-    if(blast) blast.play(); 
-    
-    // This triggers the confetti
-    confetti({ 
-        particleCount: 400, 
-        spread: 100, 
-        origin: { y: 0.6 } 
-    }); 
-    
-    // This makes your message appear after a 0.5 second delay
-    setTimeout(() => { 
-        alert("HAPPY BIRTHDAY AGAIN.SUN LOVES you IN EVERY UNIVERSER! ❤️"); 
-    }, 500);
-}
+
+        function finalBlast() { 
+            if(blast) blast.play(); 
+            confetti({ particleCount: 400, spread: 100, origin: { y: 0.6 } }); 
+            setTimeout(() => { 
+                alert("HAPPY BIRTHDAY AGAIN. SUN LOVES you IN EVERY UNIVERSE! ❤️"); 
+            }, 500);
         }
     </script>
 </body>
 </html>
+
 
 
 
