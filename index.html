@@ -372,15 +372,27 @@
                 }
             });
         }
-
-        function finalBlast() { 
-            blast.play(); 
-            confetti({ particleCount: 400, spread: 100, origin: { y: 0.6 } }); 
-            setTimeout(() => { alert("Happy Birthday Moon! I love you forever! ❤️"); }, 500);
+function finalBlast() { 
+    // This plays the sound effect
+    if(blast) blast.play(); 
+    
+    // This triggers the confetti
+    confetti({ 
+        particleCount: 400, 
+        spread: 100, 
+        origin: { y: 0.6 } 
+    }); 
+    
+    // This makes your message appear after a 0.5 second delay
+    setTimeout(() => { 
+        alert("HAPPY BIRTHDAY AGAIN.SUN LOVES you IN EVERY UNIVERSER! ❤️"); 
+    }, 500);
+}
         }
     </script>
 </body>
 </html>
+
 
 
 
