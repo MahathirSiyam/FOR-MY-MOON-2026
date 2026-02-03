@@ -136,24 +136,25 @@
         </div>
     </section>
 
-    <section id="scene-4" class="scene">
-        <div class="bg-white/5 backdrop-blur-xl p-8 rounded-[2rem] max-w-sm border border-white/10 text-center">
-            <h2 class="cursive text-3xl text-pink-400 mb-4">My Dearest Moon 🌙</h2>
-            <div class="serif text-base leading-relaxed text-pink-50/80 space-y-4 text-left">
+   <section id="scene-4" class="scene">
+        <div class="bg-white/5 backdrop-blur-xl p-8 rounded-[2rem] max-w-sm border border-white/10 text-center shadow-2xl">
+            <h2 class="cursive text-3xl text-pink-400 mb-6">Dearest Moon 🌙</h2>
+            <div class="serif text-base leading-relaxed text-pink-50/90 space-y-4 text-left">
                 <p>
-                    **Happy birthday Moon.** 🎂 It's hard to believe it's **almost 5 years since we met.** Since then, this day has been more special for me than for you. ✨
+                    "**Happy Birthday, Moon.** 🎂 **Almost four years ago, my life changed forever;** hence, this day is more significant to me than words can express. ✨ 
+                    While others celebrate your birth, **I celebrate our union.** 🥂"
                 </p>
                 <p>
-                    **I always plan for this day—not just to surprise you, but to spend quality time alone with you.** 🥂 
-                    Those quiet moments are everything to me. **You've been the special one since we first started talking.** 💬💖
+                    "Moreover, **I find the most value in our private, stolen moments together.** 🌌 Despite the serendipitous nature of our first meeting, that **connection was undeniable from the start.** 💬💖"
                 </p>
                 <p>
-                    **Before that night, I never expected we’d be together or even talk.** 🌌 
-                    It's amazing how one night changed my whole world. **But now, I love you the most.** 🌹 
-                    **I hope my love for you lasts forever.** ♾️❤️
+                    "**You are my peace and my joy.** 🌹 Ultimately, **I hope to love you for a lifetime and beyond.** ♾️❤️"
                 </p>
             </div>
-            <button onclick="toScene('scene-wish')" class="btn-fancy mt-6 w-full py-3 rounded-xl font-bold text-white uppercase tracking-widest">Make a Wish 🌙</button>
+            
+            <button onclick="toScene('scene-wish')" class="btn-fancy mt-8 w-full py-4 rounded-xl font-bold text-white uppercase tracking-[0.2em] text-[10px]">
+                Continue to my wish ✨
+            </button>
         </div>
     </section>
 
@@ -227,15 +228,32 @@
         </div>
     </section>
 
-    <section id="scene-7" class="scene text-center px-6">
-        <h2 class="cursive text-5xl text-pink-400 mb-6">Dearest Mrs Siyam,</h2>
-        <p class="serif text-base text-pink-50 mb-10 max-w-xs mx-auto leading-relaxed">Watching you grow has been my greatest joy. I love you endlessly, my beautiful Moon.</p>
-        <div class="flex flex-col gap-4 w-full max-w-xs">
-            <button onclick="finalBlast()" class="bg-red-500 py-4 rounded-full font-bold text-white text-xs uppercase tracking-widest">Seal with Love 🌹</button>
-            <button onclick="location.reload()" class="btn-outline py-4 rounded-full font-bold text-xs uppercase tracking-widest">Experience Again 🔄</button>
+<section id="scene-7" class="scene text-center px-6">
+        <div class="bg-white/5 backdrop-blur-xl p-8 rounded-[2rem] max-w-sm border border-white/10 shadow-2xl">
+            <h2 class="cursive text-5xl text-pink-400 mb-6">Always Yours 🌙</h2>
+            
+            <div class="serif text-base text-pink-50/90 mb-10 leading-relaxed italic">
+                <p>
+                    "Every moment we’ve shared has been a gift. 🎁✨ From those <b>private, stolen moments</b> to the quiet nights where it was just us, you have become the most significant part of my life."
+                </p>
+                <p class="mt-4">
+                    "You are my peace, my joy, and <b>the one my heart always searches for.</b> 🌎❤️ My love for you isn't bound by time; it is a promise for every day we have yet to see."
+                </p>
+                <p class="mt-4 font-bold text-pink-300">
+                    I am yours, for a lifetime and beyond. ♾️🌹
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-4 w-full">
+                <button onclick="finalBlast()" class="bg-red-500 py-4 rounded-full font-bold text-white text-xs uppercase tracking-[0.2em] shadow-lg hover:scale-105 transition-transform">
+                    Seal with Love 🌹
+                </button>
+                <button onclick="location.reload()" class="btn-outline py-4 rounded-full font-bold text-xs uppercase tracking-widest opacity-60">
+                    Experience Again 🔄
+                </button>
+            </div>
         </div>
     </section>
-
     <script>
         const chime = document.getElementById('snd-chime');
         const blast = document.getElementById('snd-blast');
@@ -363,6 +381,7 @@
     </script>
 </body>
 </html>
+
 
 
 
